@@ -16,7 +16,7 @@ function compilePug() {
     .src('templates/*.pug') // Path to your Pug files
     .pipe(pug({ locals: { range: range } })) // Compile template.pug, using your data
     .pipe(pug())
-    .pipe(gulp.dest('dist')) // Destination folder
+    .pipe(gulp.dest('docs')) // Destination folder
     .pipe(browserSync.stream());
 }
 
@@ -24,12 +24,12 @@ function compilePug() {
 function watch() {
   browserSync.init({
     server: {
-      baseDir: './dist', // Serve files from the 'dist' folder
+      baseDir: './docs', // Serve files from the 'docs' folder
     },
   });
 
   gulp.watch('templates/*.pug', compilePug);
-  gulp.watch('dist/*.html').on('change', browserSync.reload);
+  gulp.watch('docs/*.html').on('change', browserSync.reload);
 }
 
 // Default task
