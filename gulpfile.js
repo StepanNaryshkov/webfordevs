@@ -11,7 +11,7 @@ function range(start, end) {
 }
 
 // Compile Pug files
-function compilePug() {
+function mainPug() {
   return gulp
     .src('templates/*.pug') // Path to your Pug files
     .pipe(pug({ locals: { range: range } })) // Compile template.pug, using your data
@@ -28,9 +28,9 @@ function watch() {
     },
   });
 
-  gulp.watch('templates/*.pug', compilePug);
+  gulp.watch('templates/*.pug', mainPug);
   gulp.watch('docs/*.html').on('change', browserSync.reload);
 }
 
 // Default task
-gulp.task('default', gulp.series(compilePug, watch));
+gulp.task('default', gulp.series(mainPug, watch));
